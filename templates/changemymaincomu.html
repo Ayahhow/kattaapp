@@ -1,0 +1,23 @@
+{% extends "layout.html" %}
+{% block body %}
+  {% if session.logged_in %}
+    <p>今のメインコミュニティ：{{ nowmaincomu }}</p>
+    <ul class=entries>
+    {% if nowmycomuslength != 0 %}
+      {% for i in range(nowmycomuslength) %}
+        <li><p>{{ nowmycomus[i] }}</p>
+      {% endfor %}
+      </ul>
+      <form action="{{ url_for('changemymc') }}" method=post class=add-entry>
+        <select name=newmymaincomu>
+          {% for i in range(nowmycomuslength) %}
+            <option>{{ nowmycomus[i] }}</option>
+          {% endfor %}
+        <input type=submit value=Share>
+      </form>
+    {% else %}
+      <p>一つ以上のコミュニティを追加してください</p>
+      <a href="{{ url_for('checkmyprof') }}">プロフィール確認ページに戻る</a>
+    {% endif %}
+  {% endif %}
+{% endblock %}

@@ -1,0 +1,37 @@
+{% extends "layout.html" %}
+{% block body %}
+  {% if session.logged_in %}
+    <h2>すべてのコミュニティのKatte</h2>
+    {% for mycomunity in mycomunities %}
+      <h3>{{ mycomunity.comuname }}</h3>
+      <table>
+        <tr>
+          <th>katteid</th>
+          <th>katte</th>
+          <th>コメント</th>
+          <th>依頼追加人</th>
+          <th>Katta??</th>
+          <th>依頼追加時刻</th>
+        </tr>
+        {% for katte in mycomunity.kattes %}
+          <tr>
+            <td>{{ katte.comubuysid }}</td>
+            <td>{{ katte.comubuy }}</td>
+            <td>{{ katte.comuetc }}</td>
+            <td>{{ katte.buyuserid }}</td>
+            {% if katte.comubflag == 0 %}
+            <form method=get>
+              <td><a href="{{ katte.kattabutton }}" value="{{ katte.comubuysid }}">Katta!</a></td>
+            </form>
+            {% else %}
+              <td>{{ katte.comubflag }}</td>
+            {% endif %}
+            <td>{{ katte.comubuytime }}</td>
+          </tr>
+          {% else %}
+          <p>Katteは現在ありません</p>
+          {% endfor %}
+        </table>
+    {% endfor %}
+  {% endif %}
+{% endblock %}

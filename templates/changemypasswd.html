@@ -1,0 +1,13 @@
+{% extends "layout.html" %}
+{% block body %}
+  {% if session.logged_in %}
+    <p>今のパスワード：{{ nowpasswd }}</p>
+    <form action="{{ url_for('changemypw') }}" method=post class=add-entry>
+      <dl>
+        <dt>新しいパスワード:
+        <dd><input type=text size=30 name=newpasswd>
+        <dd><input type=submit value=Share>
+      </dl>
+    </form>
+  {% endif %}
+{% endblock %}

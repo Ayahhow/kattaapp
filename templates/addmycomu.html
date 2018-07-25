@@ -1,0 +1,15 @@
+{% extends "layout.html" %}
+{% block body %}
+  <h2>コミュニティ加入ページ</h2>
+  {% if error %}<p class=error><strong>Error:</strong> {{ error }}{% endif %}
+  <form action="{{ url_for('addmycomu') }}" method=post>
+    <dl>
+      <dt>コミュニティID:
+      <dd><input type=text name=comuid>
+      <dt>Password:
+      <dd><input type=password name=comupass>
+      <dd><input type=submit value=入る>
+    </dl>
+  </form>
+  <p>コミュニティの新規作成は<a href="{{ url_for('addcomunity') }}">こちら</a></p>
+{% endblock %}

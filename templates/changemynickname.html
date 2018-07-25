@@ -1,0 +1,13 @@
+{% extends "layout.html" %}
+{% block body %}
+  {% if session.logged_in %}
+    <p>今のニックネーム：{{ nownickname }}</p>
+    <form action="{{ url_for('changemynn') }}" method=post class=add-entry>
+      <dl>
+        <dt>新しいニックネーム:
+        <dd><input type=text size=30 name=newnickname>
+        <dd><input type=submit value=Share>
+      </dl>
+    </form>
+  {% endif %}
+{% endblock %}

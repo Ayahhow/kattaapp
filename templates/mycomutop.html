@@ -1,0 +1,13 @@
+{% extends "layout.html" %}
+{% block body %}
+  {% if session.logged_in %}
+    <h2>my comunities</h2>
+      <form method=get>
+        {% for mycomunity in mycomunities %}
+          <p><a href="{{ mycomunity.comuurl }}" value="{{ mycomunity.comuid }}">{{ mycomunity.comuname }}</a></p>
+        {% else %}
+          <p><em>Unbelievable.  No entries here so far</em></p>
+        {% endfor %}
+      </form>
+  {% endif %}
+{% endblock %}

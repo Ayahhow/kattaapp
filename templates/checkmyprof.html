@@ -1,0 +1,12 @@
+{% extends "layout.html" %}
+{% block body %}
+  {% if session.logged_in %}
+    <h2>{{ prof[1] }}さんのプロフィール</h2>
+    <p>ユーザネーム：{{ prof[0] }}</p>
+    <p>ニックネーム：{{ prof[1] }}</p>
+    <p>パスワード：{{ prof[2] }}</p>
+    <p>メインコミュニティ：{{ prof[3] }}</p>
+    <a href="{{ url_for('addmycomu') }}">コミュニティの追加</a>
+    <p>各種情報変更はこちら⇒<a href="{{ url_for('changemynickname') }}">ニックネーム</a>・<a href="{{ url_for('changemypasswd') }}">パスワード</a>・<a href="{{ url_for('changemymaincomu') }}">メインコミュニティ</a></p>
+  {% endif %}
+{% endblock %}

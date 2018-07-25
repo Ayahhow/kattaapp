@@ -1,0 +1,39 @@
+{% extends "layout.html" %}
+{% block body %}
+  {% if session.logged_in %}
+    <h2>{{ comuname }}のトップページ</h2>
+      <h3>コミュニティID：{{ comuid }}</h3>
+      <h3>メンバー</h3>
+      <ul>
+        {% for member in members %}
+          <li>{{ member }}さん</li>
+        {% endfor %}
+      </ul>
+      <h3>Katte</h3>
+      <table>
+        <tr>
+          <th>katteid</th>
+          <th>katte</th>
+          <th>コメント</th>
+          <th>依頼追加人</th>
+          <th>Katta??</th>
+          <th>依頼追加時刻</th>
+        </tr>
+        {% for katte in kattes %}
+        <tr>
+          <td>{{ katte.comubuysid }}</td>
+          <td>{{ katte.comubuy }}</td>
+          <td>{{ katte.comuetc }}</td>
+          <td>{{ katte.buyuserid }}</td>
+          <form method=get>
+            <td><a href="{{ katte.kattabutton }}" value="{{ katte.comubuysid }}">Katta!</a></td>
+          </form>
+          <td>{{ katte.comubuytime }}</td>
+        </tr>
+        {% else %}
+        <p>Katteは現在ありません</p>
+        {% endfor %}
+      </table>
+      <a href="{{ kattahisturl }}">{{ comuname }}のKatta!履歴</a>
+  {% endif %}
+{% endblock %}

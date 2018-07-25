@@ -1,0 +1,26 @@
+{% extends "layout.html" %}
+{% block body %}
+  {% if session.logged_in %}
+    <h2>{{ myname }}のKatta!履歴</h2>
+      <table>
+        <tr>
+          <th>katta履歴id</th>
+          <th>katta</th>
+          <th>コメント</th>
+          <th>依頼追加時刻</th>
+          <th>Katta！時刻</th>
+        </tr>
+        {% for katta in mkattahists %}
+        <tr>
+          <td>{{ katta.mybhsid }}</td>
+          <td>{{ katta.mybuy }}</td>
+          <td>{{ katta.myetc }}</td>
+          <td>{{ katta.mybuytime }}</td>
+          <td>{{ katta.kattatime }}</td>
+        </tr>
+        {% else %}
+        <p>Katta履歴はありません</p>
+        {% endfor %}
+      </table>
+  {% endif %}
+{% endblock %}

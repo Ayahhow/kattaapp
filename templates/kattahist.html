@@ -1,0 +1,30 @@
+{% extends "layout.html" %}
+{% block body %}
+  {% if session.logged_in %}
+    <h2>{{ comuname }}のKatta!履歴</h2>
+      <table>
+        <tr>
+          <th>katta履歴id</th>
+          <th>katta</th>
+          <th>コメント</th>
+          <th>依頼追加人</th>
+          <th>購入者</th>
+          <th>依頼追加時刻</th>
+          <th>Katta！時刻</th>
+        </tr>
+        {% for katta in kattahists %}
+        <tr>
+          <td>{{ katta.comubhsid }}</td>
+          <td>{{ katta.comubuy }}</td>
+          <td>{{ katta.comuetc }}</td>
+          <td>{{ katta.buyuser }}</td>
+          <td>{{ katta.boughtuser }}</td>
+          <td>{{ katta.comubuytime }}</td>
+          <td>{{ katta.kattatime }}</td>
+        </tr>
+        {% else %}
+        <p>Katta履歴はありません</p>
+        {% endfor %}
+      </table>
+  {% endif %}
+{% endblock %}

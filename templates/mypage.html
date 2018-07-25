@@ -1,0 +1,88 @@
+{% extends "layout.html" %}
+{% block body %}
+  {% if session.logged_in %}
+    <h2>{{ NICKNAME }}さんのマイページ</h2>
+      <h3>Katte追加</h3>
+      <form action="{{ url_for('mypage') }}" method=post>
+          <p><select name=mycomus>
+              <option>Kao</option>
+            {% if maincomuid != 0 %}
+              <option>{{ maincomuname }}</option>
+            {% endif %}
+            {% for i in range(nowmycomuslength) %}
+              <option>{{ mycomus[i] }}</option>
+            {% endfor %}
+          </select>
+            Katte:<input type=string name=comubuy> コメント:<input type=text name=comuetc><input type=submit value=Katte!></p>
+      </form>
+      <h3>メインコミュニティのKatte</h3>
+      <p><a href="{{ url_for('allcomukattes') }}">すべてのKatte</a></p>
+        {% if maincomuid != 0 %}
+          <h4>{{ maincomuname }}</h4>
+            <table>
+              <tr>
+                <th>katteid</th>
+                <th>katte</th>
+                <th>コメント</th>
+                <th>依頼追加人</th>
+                <th>Katta??</th>
+                <th>依頼追加時刻</th>
+              </tr>
+              {% for katte in kattes %}
+              <tr>
+                <td>{{ katte.comubuysid }}</td>
+                <td>{{ katte.comubuy }}</td>
+                <td>{{ katte.comuetc }}</td>
+                <td>{{ katte.buyuserid }}</td>
+                {% if katte.comubflag == 0 %}
+                <form method=get>
+                  <td><a href="{{ katte.kattabutton }}" value="{{ katte.comubuysid }}">Katta!</a></td>
+                </form>
+                {% else %}
+                  <td>{{ katte.comubflag }}</td>
+                {% endif %}
+                <td>{{ katte.comubuytime }}</td>
+              </tr>
+              {% else %}
+              <p>Katteは現在ありません</p>
+              {% endfor %}
+            </table>
+            <h4>みんなが今日Katta!もの</h4>
+              <p>超絶暇だったら仕様追加</p>
+            <a href="{{ kattahisturl }}">{{ maincomuname }}のKatta!履歴</a>
+            {% else %}
+             <p>メインコミュニティを設定してください</p>
+            {% endif %}
+
+
+
+            <h3>自分のKawanna</h3>
+                  <table>
+                    <tr>
+                      <th>kawannaid</th>
+                      <th>kawanna</th>
+                      <th>コメント</th>
+                      <th>Katta??</th>
+                      <th>依頼追加時刻</th>
+                    </tr>
+                    {% for kao in kaos %}
+                    <tr>
+                      <td>{{ kao.mybuysid }}</td>
+                      <td>{{ kao.mybuy }}</td>
+                      <td>{{ kao.myetc }}</td>
+                      <form method=get>
+                        <td><a href="{{ kao.mkattabutton }}" value="{{ kao.mybuysid }}">Katta!</a></td>
+                      </form>
+                      <td>{{ kao.mybuytime }}</td>
+                    </tr>
+                    {% else %}
+                    <p>Kawannaは現在ありません</p>
+                    {% endfor %}
+                  </table>
+                  <a href="{{ mkattahisturl }}">MyKatta!履歴</a>
+
+
+
+      <a href="{{ url_for('checkmyprof')}}">プロフィールの確認<a>
+  {% endif %}
+{% endblock %}
